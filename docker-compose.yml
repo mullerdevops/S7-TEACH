@@ -1,13 +1,20 @@
 
 version: '3.8'
 
-services:
-  web:
     image: nginx:latest
     ports:
       - "8080:80"
     volumes:
-      MYSQL_DATABASE: my_database
+      MYSQL_DATA
+      kind: Deployment
+metadata:
+  name: sample-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:BASE: my_database
       MYSQL_USER: my_user
       MYSQL_PASSWORD: my_password
     volumes:
@@ -22,7 +29,15 @@ networks:
 volumes:
   db_data:
 apiVersion: apps/v1
-kind: Deployment
+
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+      - name: sample-container
+        image: nginx:
+        kind: Deployment
 metadata:
   name: sample-deployment
 spec:
@@ -31,12 +46,4 @@ spec:
     matchLabels:
       app: sample-app
   template:
-    metadata:
-      labels:
-        app: sample-app
-    spec:
-      containers:
-      - name: sample-container
-        image: nginx:latest
-        ports:
         - containerPort: 80
