@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+
+                   echo 'Checking out source code'
+                }
+            }
+        }
+        
+        stage('Build’) {
+            agent {
+                label ‘production’
+               }
+            steps {
+                script {
+                    // This stage compiles/builds your code
+                    echo 'Building code'
+                }
+            }
+        }
+        
+        stage('Test’) {
+         agent {
+             docker {
+                image 'node:14’
+               }   
+            }
+
+            steps {
+                script {
+                    // This stage runs your tests
+                    echo 'Running tests'
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                script {
+                    // This stage deploys your application (example: to a staging environment)
+                    echo 'Deploying application to staging environment'
+                }
+            }
+        }
+    }
+}
