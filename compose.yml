@@ -7,7 +7,7 @@ services:
       - "8001:80"
   
   nginx2:
-    image: nginx:latest
+    image: nginx:v2.0.0
     ports:
       - "8002:80"
 
