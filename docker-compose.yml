@@ -10,10 +10,6 @@ services:
       - ./html:/usr/share/nginx/html
     networks:
       - my_network
-
-  db:
-    image: mysql:latest
-    environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: my_database
       MYSQL_USER: my_user
