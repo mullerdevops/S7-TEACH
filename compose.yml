@@ -46,7 +46,3 @@ services:
     ports:
       - "8009:80"
 
-  nginx10:
-    image: nginx:latest
-    ports:
-      - "8010:80"
