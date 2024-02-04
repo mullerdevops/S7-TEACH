@@ -1,0 +1,108 @@
+FROM alpine:3.17.1
+
+# ARG user=
+# ARG group=
+ENV USER_ID=65535
+ENV GROUP_ID=65535
+ENV USER_NAME=rsync-user
+ENV GROUP_NAME=rsync-user
+ENV PATH=$PATH:/root/.local/bin
+
+RUN addgroup -g $GROUP_ID $GROUP_NAME && \
+    adduser --shell /sbin/nologin --disabled-password \
+    --no-create-home --uid $USER_ID --ingroup $GROUP_NAME $USER_NAME
+
+
+
+RUN  apk update
+
+RUN apk add --no-cache \
+        curl wget bash vim git gnupg jq gcc unzip \
+        helm rsync musl-dev ca-certificates openssh-client-default \
+        python3 py3-pip py3-boto py3-certifi py3-jmespath \
+        python3-dev  py3-ruamel.yaml py3-yaml \
+#       postgresql14-client postgresql14-dev \
+        --upgrade py3-setuptools \
+        --upgrade linux-headers \
+        --upgrade py3-pip 
+        # --upgrade py3-ruamel.yaml
+
+
+### Installing Ansible
+RUN curl -sSL -o ansible "https://pkgs.alpinelinux.org/package/edge/community/x86_64/ansible" \
+        && cd /usr/local/bin \
+        apk add -o root -g root -m 0755 ansible /usr/local/bin/ansible \
+        chmod +x ansible \
+        mkdir -p ~/.local/bin \
+        mv ./ansible ~/.local/bin/ansible
+
+## Installing aws-cli
+RUN curl -o /tmp/awscliv2.zip -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip"  \
+        && cd /usr/local/bin \
+        unzip awscliv2.zip \
+        chmod +x /tmp/awscliv2 \
+        rm /tmp/awscliv2.zip \
+        aws --version
+
+# RUN curl -sSL -o /tmp/ansible-lint.zip "https://github.com/ansible/ansible-lint/archive/refs/tags/v4.3.6.zip" \
+#         && cd /usr/local/bin \
+#         unzip ansible-lint.zip \
+#         chmod +x ansible-lint \
+#         rm /tmp/ansible-lint.zip
+
+### Installin kubectl
+RUN curl -fsSL -o kubectl "https://dl.k8s.io/release/v1.26.0/bin/linux/arm64/kubectl" \
+        && cd /usr/local/bin \
+        apk add -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
+        chmod +x kubectl \
+        mkdir -p ~/.local/bin \
+        mv ./kubectl ~/.local/bin/kubectl
+
+### Installing Kubens
+RUN curl -sSL -o kubectx "https://archlinux.pkgs.org/rolling/archlinux-community-aarch64/kubectx-0.9.4-1-any.pkg.tar.xz" \
+        && cd /usr/local/bin \
+        apk add -o root -g root -m 0755 kubectx /usr/local/bin/kubectx \
+        chmod +x kubectx \
+        mkdir -p ~/.local/bin \
+        mv ./kubectx ~/.local/bin/kubectx
+
+RUN     curl -sSL -o kubens "https://opensuse.pkgs.org/tumbleweed/opensuse-oss-aarch64/kubens-0.9.4-1.4.noarch.rpm" \
+        && cd /usr/local/bin \
+        apk add -o root -g root -m 0755 kubens /usr/local/bin/kubens \
+        chmod +x kubens \
+        mkdir -p ~/.local/bin \
+        mv ./kubens ~/.local/bin/kubens
+
+### Installing Terraform
+ENV TERRAFORM_VERSION 1.4.0
+RUN curl -o /tmp/terraform.zip -fsSL "https://releases.hashicorp.com/terraform/1.4.0-alpha20221207/terraform_1.4.0-alpha20221207_linux_arm64.zip" \
+        && cd /usr/local/bin \
+         unzip /tmp/terraform.zip \
+         chmod +x terraform \
+         rm /tmp/terraform.zip
+
+### Installing Terragrunt
+RUN curl -sSL -o terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v0.43.1/terragrunt_linux_arm64" \
+        && cd /usr/local/bin \
+        apk add -o root -g root -m 0755 terragrunt /usr/local/bin/terragrunt \
+        chmod +x terragrunt \
+        mkdir -p ~/.local/bin \
+        mv ./terragrunt ~/.local/bin/terragrunt
+
+### Installing Argocd-cli
+RUN curl -sSL -o argocd-linux-amd64 "https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64" \
+        && cd /usr/local/bin \
+        apk add -m 555 argocd-linux-amd64 /usr/local/bin/argocd \
+        chmod +x argocd-linux-amd64 \
+        mkdir -p ~/.local/bin \
+        mv ./argocd-linux-amd64  ~/.local/bin/argocd-linux-amd64 
+
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+# ENV PATH=$PATH:/usr/local/bin
+RUN pip install --upgrade pip
+
+RUN pip install hvac python-gnupg psycopg2-binary  ansible-lint==6.2.2
+
+
+CMD ["/bin/sh"]
