@@ -11,3 +11,4 @@ spec:
     metadata:
       labels:
         app: sample-app
+.............
