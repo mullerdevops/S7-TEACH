@@ -6,10 +6,7 @@ services:
     ports:
       - "8001:80"
   
-  nginx2:
-    image: nginx:latest
-    ports:
-      - "8002:80"
+  
 
   nginx3:
     image: nginx:latest
