@@ -24,10 +24,3 @@ spec:
     metadata:
       labels:
         app: sample-app
-  selector:
-    matchLabels:
-      app: sample-app
-  template:
-    metadata:
-      labels:
-        app: sample-app
