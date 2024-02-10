@@ -1,0 +1,20 @@
+version: "3"
+services:
+  frontend:
+   #working_dir: /usr/src/app
+    build:
+      context: ./
+      dockerfile: Dockerfile-frontend-worker
+    #command: ["./wait-for-it.sh", "database:5432", "--", "yarn", "run:server"]
+    volumes:
+      - volfrontend:/usr/src/app
+    environment:
+      - DATABASE_HOST=database
+      - DATABASE_PORT=5432
+    depends_on:
+      - database
+      - worker
+    ports:
+      - "3015:3000"
+    networks:
+      - thimnet
