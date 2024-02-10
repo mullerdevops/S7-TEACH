@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: sample-app
+        
 apiVersion: apps/v1
 kind: Deployment
 metadata:
