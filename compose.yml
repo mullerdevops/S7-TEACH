@@ -1,26 +1,9 @@
-version: '3'
 
-services:
-  nginx1:
-    image: nginx:latest
-    ports:
-      - "8001:80"
   
   nginx2:
     image: nginx:latest
     ports:
-      - "8002:80"
-
-  nginx3:
-    image: nginx:latest
-    ports:
-      - "8003:80"
-  nginx3:
-    image: nginx:latest
-    ports:
-      - "8003:80"
-
-  nginx4:
+     nginx4:
     image: nginx:latest
     ports:
       - "8004:80"
@@ -37,10 +20,7 @@ services:
     image: nginx:latest
 
 
-  nginx6:
-    image: nginx:latest
-    ports:
-      - "8006:80"
+
 
   nginx7:
     image: nginx:latest
