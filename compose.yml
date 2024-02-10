@@ -26,7 +26,6 @@ services:
   nginx5:
     image: nginx:latest
 
-
   nginx6:
     image: nginx:latest
     ports:
