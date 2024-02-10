@@ -18,7 +18,7 @@ s
       - "8004:80"
   nginx5:
     image: nginx:latest
-
+    ports:
       - "8005:80"
   nginx4:
     image: nginx:latest
@@ -30,7 +30,9 @@ s
 
 
   nginx6:
-    
+    image: nginx:latest
+    ports:
+      - "8006:80"
 
   nginx7:
     image: nginx:latest
