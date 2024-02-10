@@ -4,13 +4,8 @@ services:
     image: nginx:latest
 
   nginx3:
-    image: nginx:latest
     ports:
       - "8003:80"
-  nginx3:
-    image: nginx:latest
-   
-
   nginx4:
     image: nginx:latest
     ports:
@@ -26,7 +21,6 @@ services:
 
   nginx5:
     image: nginx:latest
-
 
   nginx6:
     
