@@ -1,0 +1,16 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8080
+  },
+  "database": {
+    "hostname": "localhost",
+    "username": "admin",
+    "password": "password123",
+    "database": "mydatabase"
+  },
+  "logging": {
+    "level": "info",
+    "file": "app.log"
+  }
+}
