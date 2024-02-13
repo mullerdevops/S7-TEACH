@@ -1,6 +1,5 @@
 
 version: '3.8'
-
     image: nginx:latest
     ports:
       - "8080:80"
@@ -13,20 +12,16 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-  
     volumes:
       - db_data:/var/lib/mysql
     networks:
       - my_network
-      
 # api
 networks:
   my_network:
-
 volumes:
   db_data:
 apiVersion: apps/v1
-
     metadata:
       labels:
         app: sample-app
