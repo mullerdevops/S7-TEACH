@@ -1,4 +1,11 @@
 
+ a1edem20
+  
+  nginx2:
+    image: nginx:latest
+    ports:
+     nginx4:
+
 version: '3.5'
 services:
   nginx1:
@@ -13,6 +20,7 @@ services:
     ports:
       - "8003:80"
   nginx4:
+ main
     image: nginx:latest
     ports:
       - "8004:80"
@@ -27,10 +35,15 @@ services:
   nginx5:
     image: nginx:latest
 
+ a1edem20
+
+
+
   nginx6:
     image: nginx:latest
     ports:
       - "8006:80"
+ main
   nginx7:
     image: nginx:latest
     ports:
