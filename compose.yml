@@ -26,6 +26,7 @@ services:
       - "8004:80"
   nginx5:
     image: nginx:latest
+
   nginx6:
     image: nginx:latest
     ports:
