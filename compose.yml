@@ -35,9 +35,6 @@ services:
   nginx5:
     image: nginx:latest
 
- a1edem20
-
-
 
   nginx6:
     image: nginx:latest
