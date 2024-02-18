@@ -1,26 +1,18 @@
-{
-  "name": "my-nodejs-app",
-  "version": "1.0.0",
-  "description": "A sample Node.js application",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "lodash": "^4.17.21"
-  },
-  "devDependencies": {
-    "eslint": "^8.0.0",
-    "mocha": "^9.1.3"
-  },
-  "keywords": [
-    "node",
-    "express",
-    "sample",
-    "example"
-  ],
-  "author": "Your Name",
-  "license": "MIT"
-}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: example-cronjob
+spec:
+  schedule: "*/5 * * * *"   # Cron schedule in standard cron format (every 5 minutes)
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: example-job
+        spec:
+          containers:
+          - name: example-container
+            image: busybox
+            command: ["/bin/sh", "-c", "date; echo Hello from the Kubernetes cluster"]
+          restartPolicy: OnFailure
 
