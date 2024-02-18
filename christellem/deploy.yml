@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example-deployment
+  name: christelle-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: example-app
+      app: christelle-app
   template:
     metadata:
       labels:
-        app: example-app
+        app: christelle-app
     spec:
       containers:
-      - name: example-container
+      - name: christelle-container
         image: nginx:latest
         ports:
         - containerPort: 80
