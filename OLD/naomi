@@ -1,0 +1,6 @@
+ like git and gitbash.
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app

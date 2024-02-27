@@ -1,3 +1,4 @@
+s3samuel01-ses7
 # S10     ERIC
 # Good to go with Docker, Git & GitHub.
 # Waiting now for Kubernetes, Terraform and others...
