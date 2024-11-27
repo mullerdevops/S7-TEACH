@@ -28,3 +28,8 @@ networks:
 
 volumes:
   db_data:
+  networks:
+  my_network:
+
+volumes:
+  db_data:
